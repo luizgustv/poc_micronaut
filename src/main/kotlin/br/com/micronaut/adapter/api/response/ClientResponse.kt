@@ -4,11 +4,11 @@ import br.com.micronaut.application.domain.Client
 import java.util.*
 
 class ClientResponse(
-    val clientId: UUID,
+    val clientId: String,
     val name: String,
     val document: String
 ) {
-    constructor(client: Client) : this(client.clientId, client.name, client.document)
+    constructor(client: Client) : this(client.clientId, client.name, client.document.value)
 }
 
 
