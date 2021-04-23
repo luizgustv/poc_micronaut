@@ -7,10 +7,6 @@ import javax.inject.Singleton
 class RegisterClientService {
 
     fun registerClient(client: Client): Client {
-
-        //validar campo clientid nome e documento
-
-
         return client
     }
 

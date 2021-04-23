@@ -1,6 +1,7 @@
 package br.com.micronaut.application.domain
 
 import br.com.micronaut.application.exception.BusinessException
+import br.com.micronaut.application.exception.ErrorReason
 import javax.inject.Singleton
 
 @Singleton
@@ -15,17 +16,22 @@ data class Client(
 
     private fun validateFields() {
 
-        if (this.clientId.isBlank()) {
-            throw BusinessException("The clientId must not be empty")
-        }
-        if (this.name.isBlank()) {
-            throw BusinessException("The name must not be empty")
-        }
-        if (this.document.value.isBlank()) {
-            throw BusinessException("The document must not be empty")
-        }
+        val errors = mutableListOf<ErrorReason>()
+        validateCLientId()?.let { errors.add(it) }
+        validateName()?.let { errors.add(it) }
+        validateDocument()?.let { errors.add(it) }
 
+        if (errors.isNotEmpty()) throw BusinessException(errors)
     }
+
+    private fun validateCLientId() : ErrorReason? =
+        if (clientId.isBlank()) ErrorReason.REQUEST_EMPTY_CLIENT_ID else null
+
+    private fun validateName() : ErrorReason? =
+        if (name.isBlank()) ErrorReason.REQUEST_EMPTY_NAME else null
+
+    private fun validateDocument() : ErrorReason? =
+        if (document.value.isBlank()) ErrorReason.REQUEST_EMPTY_DOCUMENT else null
 
 
 }
