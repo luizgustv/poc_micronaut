@@ -4,7 +4,6 @@ import br.com.micronaut.application.exception.BusinessException
 import br.com.micronaut.application.exception.ErrorReason
 import javax.inject.Singleton
 
-@Singleton
 data class Client(
     val clientId: String,
     val name: String,
