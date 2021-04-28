@@ -1,7 +1,5 @@
-package br.com.micronaut.adapter.controller
+package br.com.micronaut.adapter.controller.exceptionhandler
 
-import br.com.micronaut.adapter.controller.exceptionhandler.Error
-import br.com.micronaut.adapter.controller.exceptionhandler.ErrorResponse
 import br.com.micronaut.application.exception.BusinessException
 import io.micronaut.context.annotation.Requirements
 import io.micronaut.context.annotation.Requires
@@ -25,15 +23,5 @@ class BusinessExceptionHandler :
                 ErrorResponse(exception.errors.map { Error(it.key, it.message) }
                 )
             )
-
-        /*
-        errorResponseProcessor.processResponse(
-            ErrorContext.builder(request)
-                .cause(exception)
-                .errorMessage(exception.message!!)
-                .build(), HttpResponse.badRequest<Any>())
-         */
-
     }
-
 }
