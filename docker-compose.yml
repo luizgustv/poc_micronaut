@@ -2,9 +2,11 @@ version: '3'
 
 services:
   dynamodb:
-    image: amazon/dynamodb-local
-    hostname: dynamodb-local
-    container_name: dynamodb-local
+    image: instructure/dynamo-local-admin
+    container_name: dynamodb-db
+    environment:
+      - AWS_ACESS_KEY_ID=key
+      - AWS_SECRET_ACESS_KEY=secret
     ports:
       - "8000:8000"
   consul:

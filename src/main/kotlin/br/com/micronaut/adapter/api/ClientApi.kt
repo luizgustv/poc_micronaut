@@ -2,6 +2,7 @@ package br.com.micronaut.adapter.api
 
 import br.com.micronaut.adapter.api.request.ClientRequest
 import br.com.micronaut.adapter.api.response.ClientResponse
+import br.com.micronaut.adapter.api.response.FindDocumentResponse
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Get
@@ -17,6 +18,6 @@ interface ClientApi {
     fun registerClient(@Body request: ClientRequest): HttpResponse<ClientResponse>
 
     @Get("/client/{clientId}")
-    fun findDocument(@PathVariable("clientId") request: String): Map<String, String>
+    fun findDocument(@PathVariable("clientId") clientId: String): HttpResponse<FindDocumentResponse>
 
 }

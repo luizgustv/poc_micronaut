@@ -1,5 +1,14 @@
+### micronaut ###
 micronaut:
   application:
     name: poc
   server:
     port: 80
+
+### aws ###
+aws:
+  accessKeyId: "id"
+  secretKey: "secret-key"
+  sessionToken: "token"
+  region: eu-west-1
+  endpoint: "http://localhost:8000"
