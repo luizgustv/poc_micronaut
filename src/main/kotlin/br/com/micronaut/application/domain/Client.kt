@@ -1,5 +1,6 @@
 package br.com.micronaut.application.domain
 
+import br.com.micronaut.adapter.out.entity.ClientEntity
 import br.com.micronaut.application.exception.BusinessException
 import br.com.micronaut.application.exception.ErrorReason
 import javax.inject.Singleton
@@ -32,5 +33,7 @@ data class Client(
     private fun validateDocument() : ErrorReason? =
         if (document.value.isBlank()) ErrorReason.REQUEST_EMPTY_DOCUMENT else null
 
+    fun toEntity(): ClientEntity =
+        ClientEntity(this.clientId, this.name, this.document)
 
 }

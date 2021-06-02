@@ -10,5 +10,5 @@ aws:
   accessKeyId: "id"
   secretKey: "secret-key"
   sessionToken: "token"
-  region: eu-west-1
+  region: "eu-west-1"
   endpoint: "http://localhost:8000"
