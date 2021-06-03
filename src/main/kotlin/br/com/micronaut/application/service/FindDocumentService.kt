@@ -1,14 +1,14 @@
 package br.com.micronaut.application.service
 
+import br.com.micronaut.adapter.out.DynamoOperations
 import br.com.micronaut.application.domain.Client
-import br.com.micronaut.application.domain.ClientDocument
 import javax.inject.Singleton
 
 @Singleton
-class FindDocumentService {
+class FindDocumentService(private val dynamo: DynamoOperations) {
 
-    fun findDocument(clientId: String): Client{
-        return Client("dasjkdl","Luiz", ClientDocument("58934058324"))
+    fun findDocument(clientId: String): Client {
+        return dynamo.findItem(clientId, "DbClient").toDomain()
     }
 
 }

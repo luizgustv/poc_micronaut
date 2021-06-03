@@ -10,7 +10,10 @@ import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Controller
 
 @Controller("/micronaut/v1")
-class ClientController(private val registerClientService: RegisterClientService, private val findDocumentService: FindDocumentService) : ClientApi {
+class ClientController(
+    private val registerClientService: RegisterClientService,
+    private val findDocumentService: FindDocumentService
+) : ClientApi {
 
     override fun testApi(): String = "Hello testing..."
 

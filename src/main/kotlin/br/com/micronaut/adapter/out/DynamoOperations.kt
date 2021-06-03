@@ -3,13 +3,16 @@ package br.com.micronaut.adapter.out
 import br.com.micronaut.adapter.out.entity.ClientEntity
 import io.micronaut.context.annotation.Value
 import io.micronaut.context.event.StartupEvent
+import io.micronaut.http.HttpStatus
 import io.micronaut.runtime.event.annotation.EventListener
+import org.apache.http.client.HttpResponseException
 import org.slf4j.LoggerFactory
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider
 import software.amazon.awssdk.regions.Region
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient
 import software.amazon.awssdk.services.dynamodb.model.*
+import java.lang.Exception
 import java.net.URI
 import javax.inject.Singleton
 
@@ -22,7 +25,7 @@ class DynamoOperations(
     private var awsDynamoEndpoint: String
 ) {
 
-    companion object{
+    companion object {
         private val logger = LoggerFactory.getLogger(DynamoOperations::class.java)
     }
 
@@ -38,9 +41,9 @@ class DynamoOperations(
     @EventListener
     fun createTable(startupEvent: StartupEvent) {
 
-       val tables = buildDbClient().listTables()
+        val tables = buildDbClient().listTables()
 
-        if (!tables.tableNames().contains("DbClient")){
+        if (!tables.tableNames().contains("DbClient")) {
             val request: CreateTableRequest = CreateTableRequest.builder()
                 .attributeDefinitions(
                     AttributeDefinition.builder()
@@ -68,7 +71,7 @@ class DynamoOperations(
 
     }
 
-    fun insertItem(itemValues: HashMap<String, AttributeValue>, tableName: String){
+    fun insertItem(itemValues: HashMap<String, AttributeValue>, tableName: String) {
 
         val putItemRequest = PutItemRequest.builder()
             .tableName(tableName)
@@ -78,22 +81,30 @@ class DynamoOperations(
         try {
             buildDbClient().putItem(putItemRequest)
             logger.info("item adicionado no dynamo")
-        }catch (ex: ResourceNotFoundException){
+        } catch (ex: ResourceNotFoundException) {
             logger.info("Tabela não encontrada")
-        }catch (ex: DynamoDbException){
+        } catch (ex: DynamoDbException) {
             logger.error(ex.message)
         }
 
     }
 
-    /*
-        val keyToGet = HashMap<String, AttributeValue>()
-        keyToGet["clientId"] = AttributeValue.builder()
-            .s(client.clientId).build();
-        GetItemRequest.builder()
-            .key(keyToGet)
-            .tableName("DbClient")
-            .build()
-     */
+    fun findItem(value: String, tableName: String): ClientEntity {
+
+        val itemRequest = buildClientItemRequest(value, tableName)
+
+        try {
+            val itemsFound = buildDbClient().getItem(itemRequest).item()
+
+            if (itemsFound.isEmpty())
+                throw HttpResponseException(HttpStatus.NOT_FOUND.code, "Item não encontrado")
+
+            return buildClientEntity(itemsFound)
+
+        } catch (ex: DynamoDbException) {
+            logger.error(ex.message)
+            throw Exception("erro no banco!")
+        }
+    }
 
 }

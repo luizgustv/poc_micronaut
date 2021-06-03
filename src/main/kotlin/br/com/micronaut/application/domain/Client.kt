@@ -33,7 +33,8 @@ data class Client(
     private fun validateDocument() : ErrorReason? =
         if (document.value.isBlank()) ErrorReason.REQUEST_EMPTY_DOCUMENT else null
 
+    //change?
     fun toEntity(): ClientEntity =
-        ClientEntity(this.clientId, this.name, this.document)
+        ClientEntity(this.clientId, this.name, this.document.value)
 
 }
