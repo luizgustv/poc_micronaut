@@ -3,9 +3,10 @@ package br.com.micronaut.adapter.out
 import br.com.micronaut.adapter.out.entity.ClientEntity
 import io.micronaut.context.annotation.Value
 import io.micronaut.context.event.StartupEvent
-import io.micronaut.http.HttpStatus
+import io.micronaut.http.HttpResponse
+import io.micronaut.http.client.exceptions.HttpClientResponseException
+import io.micronaut.http.exceptions.HttpException
 import io.micronaut.runtime.event.annotation.EventListener
-import org.apache.http.client.HttpResponseException
 import org.slf4j.LoggerFactory
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider
@@ -97,7 +98,7 @@ class DynamoOperations(
             val itemsFound = buildDbClient().getItem(itemRequest).item()
 
             if (itemsFound.isEmpty())
-                throw HttpResponseException(HttpStatus.NOT_FOUND.code, "Item não encontrado")
+                throw HttpClientResponseException("Item não encontrado", HttpResponse.notFound(""))
 
             return buildClientEntity(itemsFound)
 

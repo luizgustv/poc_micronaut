@@ -36,7 +36,6 @@ dependencies {
     //aws
     implementation("io.micronaut.aws:micronaut-aws-sdk-v2")
     implementation("software.amazon.awssdk:dynamodb")
-    implementation("com.amazonaws:aws-java-sdk-dynamodb:1.11.1015")
 
 }
 
