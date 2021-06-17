@@ -4,6 +4,20 @@ micronaut:
     name: poc
   server:
     port: 80
+  security:
+    authentication: bearer
+  endpoints:
+    login:
+      enabled: true
+      path: "/micronaut/v1/login"
+    token:
+      jwt:
+        signatures:
+          secret:
+            generator:
+              secret: "${JWT_GENERATOR_SIGNATURE_SECRET:BB36D3765316D495DCDCC5B86DF45}"
+
+
 
 ### aws ###
 aws:
