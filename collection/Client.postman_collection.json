@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "f7d1c5e3-a1cd-4e80-bf65-4bdb3d69f38e",
+		"name": "Client",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test requisition",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:80/micronaut/v1/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"micronaut",
+						"v1",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Client",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clientId\": \"8dd5f256-47d9-408e-a452-f4f16d1e8356\",\r\n    \"name\": \"Luiz\",\r\n    \"document\": \"document\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/micronaut/v1/client",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"micronaut",
+						"v1",
+						"client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find document",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJub25lIn0.eyJzdWIiOiJ1c2VyIiwibmJmIjoxNjI0OTIxNjM1LCJyb2xlcyI6W10sImlzcyI6InBvYyIsImV4cCI6MTYyNDkyNTIzNSwiaWF0IjoxNjI0OTIxNjM1fQ.",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:80/micronaut/v1/client/8dd5f256-47d9-408e-a452-f4f16d1e8356",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"micronaut",
+						"v1",
+						"client",
+						"8dd5f256-47d9-408e-a452-f4f16d1e8356"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"user\",\r\n  \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:80/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
