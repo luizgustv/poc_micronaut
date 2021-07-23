@@ -1,4 +1,7 @@
 FROM openjdk:11
 COPY build/libs/poc-micronaut-*-all.jar poc-micronaut.jar
 EXPOSE 80
-CMD ["java", "-Dcom.sun.management.jmxremote", "-Xmx128m", "-XX:+IdleTuningGcOnIdle", "-Xtune:virtualized", "-jar", "helloworld.jar"]
+CMD ["java","-jar", "poc-micronaut.jar"]
+
+#CMD ["executable", "param1", "param2"…]
+#docker build -t poc-micronaut:1.0 .

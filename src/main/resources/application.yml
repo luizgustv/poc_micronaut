@@ -18,8 +18,8 @@ micronaut:
 
 ### aws ###
 aws:
-  accessKeyId: "id"
-  secretKey: "secret-key"
-  sessionToken: "token"
-  region: "eu-west-1"
-  endpoint: "http://localhost:8000"
+  accessKeyId: "${AWS_KEY_ID:id}"
+  secretKey: "${AWS_SECRET_KEY:secret-key}"
+  sessionToken: "${AWS_SESSION_TOKEN:token}"
+  region: "${AWS_REGION:eu-west-1}"
+  endpoint: "${AWS_ENDPOINT:http://localhost:8000}"
