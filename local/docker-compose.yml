@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+#  poc-micronaut:
+#    image: poc_micronaut_service:1.0
+#    ports:
+#      - "80:80"
+#    environment:
+#      - JWT_GENERATOR_SIGNATURE_SECRET=BB36D3765316D495DCDCC5B86DF45
+#      - AWS_KEY_ID=id
+#      - AWS_SECRET_KEY=secret-key
+#      - AWS_SESSION_TOKEN=token
+#      - AWS_REGION=eu-west-1
+#      - AWS_ENDPOINT=http://dynamodb:8000
+#  dynamodb:
+#    image: instructure/dynamo-local-admin
+#    container_name: dynamodb-db
+#    environment:
+#      - AWS_ACESS_KEY_ID=key
+#      - AWS_SECRET_ACESS_KEY=secret
+#    ports:
+#      - "8000:8000"
+#    volumes:
+#    - dynamodb_data:/home/dynamodblocal/data
+  localstack:
+    image: localstack/localstack
+    environment:
+      - SERVICES=dynamodb
+    ports:
+    - "4566:4566"
+
+  localstack-setup:
+    build:
+      context: ../local
+      dockerfile: Dockerfile.localstack
+    depends_on:
+      - localstack
+#  consul:
+#    image: bitnami/consul:latest
+#    ports:
+#      - "8500:8500"
+#volumes:
+#  dynamodb_data:
+#    driver: local

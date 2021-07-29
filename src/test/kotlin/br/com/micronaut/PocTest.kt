@@ -8,12 +8,12 @@ import javax.inject.Inject
 @MicronautTest
 class PocTest {
 
-    @Inject
-    lateinit var application: EmbeddedApplication<*>
-
-    @Test
-    fun testItWorks() {
-        Assertions.assertTrue(application.isRunning)
-    }
+//    @Inject
+//    lateinit var application: EmbeddedApplication<*>
+//
+//    @Test
+//    fun testItWorks() {
+//        Assertions.assertTrue(application.isRunning)
+//    }
 
 }

@@ -39,7 +39,7 @@ class DynamoOperations(
 
     private fun buildAwsCredentials() = AwsBasicCredentials.create("\${aws.accessKeyId}", "\${aws.secretKey}")
 
-    @EventListener
+    //@EventListener
     fun createTable(startupEvent: StartupEvent) {
 
         val tables = buildDbClient().listTables()

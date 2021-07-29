@@ -1,0 +1,14 @@
+{
+  "TableName": "DbClient",
+  "IndexName": "clientId",
+  "KeySchema": [
+    {
+      "AttributeName": "clientId",
+      "KeyType": "HASH"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 10,
+    "WriteCapacityUnits": 10
+  }
+}
