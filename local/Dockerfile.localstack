@@ -1,16 +1,12 @@
-FROM amazon/aws-cli:latest as base
+FROM amazon/aws-cli:latest as aws-cli
 
-RUN mkdir -p /table
+WORKDIR /setup
 
-#copiar arquivo para essa pasta
-COPY client-table.json /table/
+COPY --chown=root:root ./localstack/aws/configuration /root/.aws/config
+COPY --chown=root:root ./localstack/aws/credentials /root/.aws/credentials
+COPY --chown=root:root ./localstack/create-resources.sh .
+COPY --chown=root:root ./localstack/files .
 
-WORKDIR /table
+RUN chmod +x create-resources.sh
 
-#CMD ["aws dynamodb list-tables"]
-
-#cadastrar credenciais na pasta correta da aws
-CMD ["aws dynamodb create-table --table-name DbClient --attribute-definitions AttributeName=clientId,AttributeType=S --key-schema AttributeName=clientId,KeyType=HASH --provisioned-throughput ReadCapacityUnits=10,WriteCapacityUnits=10 --endpoint-url http://localhost:4566"]
-
-
-
+CMD ["setup/create-resource.sh"]
