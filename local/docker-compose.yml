@@ -1,17 +1,17 @@
 version: '3'
 
 services:
-#  poc-micronaut:
-#    image: poc_micronaut_service:1.0
-#    ports:
-#      - "80:80"
-#    environment:
-#      - JWT_GENERATOR_SIGNATURE_SECRET=BB36D3765316D495DCDCC5B86DF45
-#      - AWS_KEY_ID=id
-#      - AWS_SECRET_KEY=secret-key
-#      - AWS_SESSION_TOKEN=token
-#      - AWS_REGION=eu-west-1
-#      - AWS_ENDPOINT=http://dynamodb:8000
+  poc-micronaut:
+    image: poc_micronaut_service:1.0
+    ports:
+      - "80:80"
+    environment:
+      - JWT_GENERATOR_SIGNATURE_SECRET=BB36D3765316D495DCDCC5B86DF45
+      - AWS_KEY_ID=id
+      - AWS_SECRET_KEY=secret-key
+      - AWS_SESSION_TOKEN=token
+      - AWS_REGION=eu-west-1
+      - AWS_ENDPOINT=http://localstack:8000
 
   localstack:
     image: localstack/localstack
