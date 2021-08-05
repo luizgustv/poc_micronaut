@@ -9,4 +9,4 @@ COPY --chown=root:root ./localstack/files .
 
 RUN chmod +x create-resources.sh
 
-CMD ["setup/create-resource.sh"]
+ENTRYPOINT [ "/setup/create-resources.sh" ]

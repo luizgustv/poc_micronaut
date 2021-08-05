@@ -1,6 +1,5 @@
 {
   "TableName": "DbClient",
-  "IndexName": "clientId",
   "KeySchema": [
     {
       "AttributeName": "clientId",

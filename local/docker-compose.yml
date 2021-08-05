@@ -12,16 +12,7 @@ services:
 #      - AWS_SESSION_TOKEN=token
 #      - AWS_REGION=eu-west-1
 #      - AWS_ENDPOINT=http://dynamodb:8000
-#  dynamodb:
-#    image: instructure/dynamo-local-admin
-#    container_name: dynamodb-db
-#    environment:
-#      - AWS_ACESS_KEY_ID=key
-#      - AWS_SECRET_ACESS_KEY=secret
-#    ports:
-#      - "8000:8000"
-#    volumes:
-#    - dynamodb_data:/home/dynamodblocal/data
+
   localstack:
     image: localstack/localstack
     environment:
@@ -37,7 +28,7 @@ services:
       #manter os dados salvos
       -  ./tmp:/tmp/localstack
       #pasta onde script ficam e são inicializados em ordem alfabética
-      - ./script:/docker-entrypoint-initaws.d
+      - ./mock:/docker-entrypoint-initaws.d
 
   localstack-setup:
     build:
@@ -46,10 +37,3 @@ services:
     image: localstack-setup
     depends_on:
       - localstack
-#  consul:
-#    image: bitnami/consul:latest
-#    ports:
-#      - "8500:8500"
-#volumes:
-#  dynamodb_data:
-#    driver: local
